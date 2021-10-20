@@ -12,7 +12,9 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [notification, setNotification] = useState({ message: null });
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+    blogService.getAll().then((blogs) => {
+      setBlogs(blogs.sort((a,b) => b.likes - a.likes))
+    });
   }, []);
 
   useEffect(() => {
@@ -86,6 +88,25 @@ const App = () => {
     }
   };
 
+  
+  const deleteBlog = async (id) => {
+    try {
+      await blogService.deleteBlog(id)
+      const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === id)
+      const updatedBlogs = blogs
+      updatedBlogs.splice(indexOfBlogToUpdate, 1)
+      console.log(updatedBlogs)
+      setBlogs(() => [...updatedBlogs])
+    
+    } catch (exception) {
+      setNotification({
+        message: `Couldn't delete blog, reason: ${exception.message}`,
+        type: "neg",
+      });
+      setTimeout(() => setNotification({ message: null }), 5000);
+    }
+  };
+
   const blogFormRef = useRef();
   const blogForm = () => (
     <Togglable buttonLabel={"Add Blog"} ref={blogFormRef}>
@@ -109,7 +130,7 @@ const App = () => {
       <Notification notification={notification} />
       {blogForm()}
       {blogs.map((blog) => (
-        <Blog key={blog.id} passedBlog={blog} updateBlog={updateBlog} />
+        <Blog key={blog.id} passedBlog={blog} updateBlog={updateBlog} deleteBlog={deleteBlog} username={user.username} />
       ))}
     </div>
   );
