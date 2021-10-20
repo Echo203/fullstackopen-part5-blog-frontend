@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
@@ -56,6 +56,7 @@ const App = () => {
   const handleNewBlog = async (blogObject) => {
     try {
       const newBlog = await blogService.postBlog(blogObject);
+      blogFormRef.current.toggleVisibility()
       setNotification({ message: "Succesfully added blog", type: "pos" });
       setBlogs(blogs.concat(newBlog));
       setTimeout(() => setNotification({ message: null }), 5000);
@@ -68,8 +69,9 @@ const App = () => {
     }
   };
 
+  const blogFormRef = useRef()
   const blogForm = () => (
-    <Togglable buttonLabel={'Add Blog'}>
+    <Togglable buttonLabel={'Add Blog'} ref={blogFormRef}>
       <BlogForm handleNewBlog={handleNewBlog}/>
     </Togglable>
   )
