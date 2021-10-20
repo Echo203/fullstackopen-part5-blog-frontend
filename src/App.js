@@ -69,10 +69,10 @@ const App = () => {
     }
   };
 
-  const updateBlog = async (updatedBlogObject) => {
+  const updateBlog = async (updatedBlogObject, id) => {
     try {
-      const returnedBlog = await blogService.updateBlog(updatedBlogObject, updatedBlogObject.id);
-      const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === updatedBlogObject.id)
+      const returnedBlog = await blogService.updateBlog(updatedBlogObject, id);
+      const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === id)
       const updatedBlogList = blogs
       updatedBlogList[indexOfBlogToUpdate] = returnedBlog
       setBlogs(updatedBlogList)
