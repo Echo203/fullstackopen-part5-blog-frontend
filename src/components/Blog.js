@@ -31,7 +31,9 @@ const Blog = ({ passedBlog, updateBlog, deleteBlog, username }) => {
   };
 
   const handleBlogDelete = () => {
-    deleteBlog(blog.id);
+    if (window.confirm("Are you sure you want to delete blog?")) {
+      deleteBlog(blog.id);
+    }
   };
 
   const deleteButton = () => {
