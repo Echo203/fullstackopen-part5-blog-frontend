@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
-const Blog = ({ blog, updateBlog }) => {
+const Blog = ({ passedBlog, updateBlog }) => {
   const [visible, setVisible] = useState(false)
+  const [blog, setBlog] = useState(passedBlog)
 
   const blogStyle = {
     paddingTop: 10,
@@ -18,13 +19,15 @@ const Blog = ({ blog, updateBlog }) => {
   const handlePostLike = (e) => {
     const updatedBlog = {
       user: blog.user,
-      likes: blog.likes +=1,
+      likes: blog.likes + 1,
       author: blog.author,
       title: blog.title,
-      url: blog.url
+      url: blog.url,
+      id: blog.id
     }
-    const idOfBlogToUpdate = blog.id
-    updateBlog(updatedBlog, idOfBlogToUpdate)
+    setBlog(updatedBlog)
+    const idOfBlog = blog.id
+    updateBlog(updatedBlog, idOfBlog)
   }
 
   return (

@@ -69,13 +69,13 @@ const App = () => {
     }
   };
 
-  const updateBlog = async (updatedBlogObject, id) => {
+  const updateBlog = async (updatedBlogObject) => {
     try {
-      const returnedBlog = await blogService.updateBlog(updatedBlogObject, id);
-      const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === id)
+      const returnedBlog = await blogService.updateBlog(updatedBlogObject, updatedBlogObject.id);
+      const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === updatedBlogObject.id)
       const updatedBlogList = blogs
       updatedBlogList[indexOfBlogToUpdate] = returnedBlog
-      //setBlogs(updatedBlogList)
+      setBlogs(updatedBlogList)
 
     } catch (exception) {
       setNotification({
@@ -109,7 +109,7 @@ const App = () => {
       <Notification notification={notification} />
       {blogForm()}
       {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
+        <Blog key={blog.id} passedBlog={blog} updateBlog={updateBlog} />
       ))}
     </div>
   );
