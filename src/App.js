@@ -74,9 +74,8 @@ const App = () => {
   const updateBlog = async (updatedBlogObject, id) => {
     try {
       const returnedBlog = await blogService.updateBlog(updatedBlogObject, id);
-      const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === id)
       const updatedBlogList = blogs
-      updatedBlogList[indexOfBlogToUpdate] = returnedBlog
+      updatedBlogList[blogs.findIndex((blog) => blog.id === id)] = returnedBlog
       setBlogs(updatedBlogList)
 
     } catch (exception) {
@@ -95,7 +94,6 @@ const App = () => {
       const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === id)
       const updatedBlogs = blogs
       updatedBlogs.splice(indexOfBlogToUpdate, 1)
-      console.log(updatedBlogs)
       setBlogs(() => [...updatedBlogs])
     
     } catch (exception) {
