@@ -48,15 +48,15 @@ const App = () => {
   };
 
   const loginForm = () => (
-    <Togglable buttonLabel={'Log in'}>
-      <LoginForm handleLogin={handleLogin}/>
+    <Togglable buttonLabel={"Log in"}>
+      <LoginForm handleLogin={handleLogin} />
     </Togglable>
-  )
+  );
 
   const handleNewBlog = async (blogObject) => {
     try {
       const newBlog = await blogService.postBlog(blogObject);
-      blogFormRef.current.toggleVisibility()
+      blogFormRef.current.toggleVisibility();
       setNotification({ message: "Succesfully added blog", type: "pos" });
       setBlogs(blogs.concat(newBlog));
       setTimeout(() => setNotification({ message: null }), 5000);
@@ -69,12 +69,29 @@ const App = () => {
     }
   };
 
-  const blogFormRef = useRef()
+  const updateBlog = async (updatedBlogObject, id) => {
+    try {
+      const returnedBlog = await blogService.updateBlog(updatedBlogObject, id);
+      const indexOfBlogToUpdate = blogs.findIndex((blog) => blog.id === id)
+      const updatedBlogList = blogs
+      updatedBlogList[indexOfBlogToUpdate] = returnedBlog
+      //setBlogs(updatedBlogList)
+
+    } catch (exception) {
+      setNotification({
+        message: `Couldn't update likes, reason: ${exception.message}`,
+        type: "neg",
+      });
+      setTimeout(() => setNotification({ message: null }), 5000);
+    }
+  };
+
+  const blogFormRef = useRef();
   const blogForm = () => (
-    <Togglable buttonLabel={'Add Blog'} ref={blogFormRef}>
-      <BlogForm handleNewBlog={handleNewBlog}/>
+    <Togglable buttonLabel={"Add Blog"} ref={blogFormRef}>
+      <BlogForm handleNewBlog={handleNewBlog} />
     </Togglable>
-  )
+  );
 
   if (user === null) {
     return (
@@ -92,7 +109,7 @@ const App = () => {
       <Notification notification={notification} />
       {blogForm()}
       {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
       ))}
     </div>
   );
