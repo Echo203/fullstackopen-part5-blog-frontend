@@ -36,12 +36,6 @@ const Blog = ({ passedBlog, updateBlog, deleteBlog, id }) => {
     }
   };
 
-  // const deleteButton = () => {
-  //   ;
-  // };
-  console.log('userID :>> ', id);
-  console.log('blog.user.id :>> ', blog.user.id);
-
   return (
     <div style={blogStyle}>
       <div>
@@ -56,7 +50,7 @@ const Blog = ({ passedBlog, updateBlog, deleteBlog, id }) => {
         Author: {blog.author} <br />
         {blog.user.id === id ? (
       <button onClick={handleBlogDelete}>Delete</button>
-    ) : <p>xxx</p> }
+    ) : null }
       </div>
     </div>
   );

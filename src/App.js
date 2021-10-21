@@ -59,7 +59,6 @@ const App = () => {
     try {
       const newBlog = await blogService.postBlog(blogObject);
       newBlog.user = user
-      console.log('newBlog :>> ', newBlog);
       blogFormRef.current.toggleVisibility();
       setNotification({ message: "Succesfully added blog", type: "pos" });
       setBlogs(blogs.concat(newBlog));
