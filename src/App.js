@@ -58,6 +58,8 @@ const App = () => {
   const handleNewBlog = async (blogObject) => {
     try {
       const newBlog = await blogService.postBlog(blogObject);
+      newBlog.user = user
+      console.log('newBlog :>> ', newBlog);
       blogFormRef.current.toggleVisibility();
       setNotification({ message: "Succesfully added blog", type: "pos" });
       setBlogs(blogs.concat(newBlog));
@@ -128,7 +130,7 @@ const App = () => {
       <Notification notification={notification} />
       {blogForm()}
       {blogs.map((blog) => (
-        <Blog key={blog.id} passedBlog={blog} updateBlog={updateBlog} deleteBlog={deleteBlog} username={user.username} />
+        <Blog key={blog.id} passedBlog={blog} updateBlog={updateBlog} deleteBlog={deleteBlog} id={user.id} />
       ))}
     </div>
   );

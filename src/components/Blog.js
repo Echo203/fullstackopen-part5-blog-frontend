@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Blog = ({ passedBlog, updateBlog, deleteBlog, username }) => {
+const Blog = ({ passedBlog, updateBlog, deleteBlog, id }) => {
   const [visible, setVisible] = useState(false);
   const [blog, setBlog] = useState(passedBlog);
 
@@ -36,11 +36,11 @@ const Blog = ({ passedBlog, updateBlog, deleteBlog, username }) => {
     }
   };
 
-  const deleteButton = () => {
-    if (blog.user && blog.user.username === username) {
-      return <button onClick={handleBlogDelete}>Delete</button>;
-    }
-  };
+  // const deleteButton = () => {
+  //   ;
+  // };
+  console.log('userID :>> ', id);
+  console.log('blog.user.id :>> ', blog.user.id);
 
   return (
     <div style={blogStyle}>
@@ -54,7 +54,9 @@ const Blog = ({ passedBlog, updateBlog, deleteBlog, username }) => {
         <button onClick={handlePostLike}>Like</button>
         <br />
         Author: {blog.author} <br />
-        {deleteButton()}
+        {blog.user.id === id ? (
+      <button onClick={handleBlogDelete}>Delete</button>
+    ) : <p>xxx</p> }
       </div>
     </div>
   );
