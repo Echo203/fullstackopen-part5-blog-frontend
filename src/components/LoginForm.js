@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 const LoginForm = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleLoginSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     props.handleLogin(username, password)
-    setUsername("");
-    setPassword("");
+    setUsername('')
+    setPassword('')
   }
 
   return (
@@ -33,7 +33,7 @@ const LoginForm = (props) => {
       </div>
       <button type="submit">Log in</button>
     </form>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm
