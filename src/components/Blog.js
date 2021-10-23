@@ -38,15 +38,15 @@ const Blog = ({ passedBlog, updateBlog, deleteBlog, id }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      <div>
+    <div style={blogStyle} className='blogContainer'>
+      <div className='titleBlogContainer'>
         {blog.title}
         <button onClick={toggleVisibility}>Show more</button>
       </div>
-      <div style={visibility}>
+      <div style={visibility} className='hiddenBlogContainer'>
         Link: {blog.url} <br />
         Likes: {blog.likes}
-        <button onClick={handlePostLike}>Like</button>
+        <button className='likeButton' onClick={handlePostLike}>Like</button>
         <br />
         Author: {blog.author} <br />
         {blog.user.id === id ? (
