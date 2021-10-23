@@ -23,6 +23,7 @@ const BlogForm = (props) => {
       <div>
         Title:
         <input
+          id='title'
           type="text"
           value={title}
           name="title"
@@ -32,6 +33,7 @@ const BlogForm = (props) => {
       <div>
         Author:
         <input
+          id='author'
           type="text"
           value={author}
           name="author"
@@ -41,6 +43,7 @@ const BlogForm = (props) => {
       <div>
         Url:
         <input
+          id='url'
           type="text"
           value={url}
           name="url"
