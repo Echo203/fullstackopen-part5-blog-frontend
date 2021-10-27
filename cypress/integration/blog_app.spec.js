@@ -42,5 +42,28 @@ describe('Blog app', function() {
 
       cy.contains('New blog added by cypress')
     })
+
+    describe('and blog was created', function() {
+      beforeEach(function() {
+        cy.contains('Add Blog').click()
+        cy.get('#title').type('Another blog added by cypress')
+        cy.get('#author').type('Marcin')
+        cy.get('#url').type('www.wp.pl')
+        cy.contains('Create').click()
+      })
+
+      it('A blog can be liked', function() {
+        cy.contains('Another blog added by cypress').contains('Show more').click()
+        cy.contains('Another blog added by cypress').parent().contains('Like').click()
+
+        cy.contains('Another blog added by cypress').parent().should('contain', 'Likes: 1')
+      })
+
+      it('A blog can be deleted, by a user who created it', function() {
+        cy.contains('Another blog added by cypress').contains('Show more').click()
+        cy.contains('Another blog added by cypress').parent().contains('Delete').click()
+        cy.get('html').should('not.contain', 'Another blog added by cypress')
+      })
+    })
   })
 })
