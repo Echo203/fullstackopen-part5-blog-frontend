@@ -50,7 +50,7 @@ const App = () => {
   }
 
   const loginForm = () => (
-    <Togglable buttonLabel={'Log in'} dissplayByDefault={true}>
+    <Togglable buttonLabel={'Log in'} dissplayByDefault={window.localStorage.getItem('userLoggedIntoBlogapp') ? false : true}>
       <LoginForm handleLogin={handleLogin} />
     </Togglable>
   )

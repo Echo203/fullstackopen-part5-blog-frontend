@@ -27,4 +27,14 @@ describe('Blog app', function() {
       cy.get('html').should('contain', 'Wrong Login or Password')
     })
   })
+
+  describe('When logged in', function() {
+    beforeEach(function() {
+      cy.login({ username: 'test', password: 'test' })
+    })
+
+    it('A blog can be created', function() {
+      // ...
+    })
+  })
 })
