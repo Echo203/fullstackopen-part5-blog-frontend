@@ -1,7 +1,7 @@
 import React, { useState, useImperativeHandle } from 'react'
 
 const Togglable = React.forwardRef((props, ref) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(props.dissplayByDefault ? true : false)
 
   const hiddenWhenVisible = { display: visible ? 'none' : '' }
   const shownWhenVisible = { display: visible ? '' : 'none' }

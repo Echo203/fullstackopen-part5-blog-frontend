@@ -50,7 +50,7 @@ const App = () => {
   }
 
   const loginForm = () => (
-    <Togglable buttonLabel={'Log in'}>
+    <Togglable buttonLabel={'Log in'} dissplayByDefault={true}>
       <LoginForm handleLogin={handleLogin} />
     </Togglable>
   )
