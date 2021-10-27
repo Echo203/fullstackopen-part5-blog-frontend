@@ -30,7 +30,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
   }).then(res => {
     window.localStorage.setItem(
       'userLoggedIntoBlogapp',
-      JSON.stringify(res.data)
+      JSON.stringify(res.body)
     )
     cy.visit('http://localhost:3000')
   })

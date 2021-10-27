@@ -34,7 +34,13 @@ describe('Blog app', function() {
     })
 
     it('A blog can be created', function() {
-      // ...
+      cy.contains('Add Blog').click()
+      cy.get('#title').type('New blog added by cypress')
+      cy.get('#author').type('Marcin')
+      cy.get('#url').type('www.wp.pl')
+      cy.contains('Create').click()
+
+      cy.contains('New blog added by cypress')
     })
   })
 })
