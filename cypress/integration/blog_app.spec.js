@@ -88,7 +88,9 @@ describe('Blog app', function() {
         cy.contains('Second cypress').parent().contains('Like').click()
 
         cy.visit('http://localhost:3000')
-        cy.get('.blogContainer').then(res => console.log(res))
+        cy.get('.blogContainer:first').should('contain', 'Third cypress')
+        cy.get('.blogContainer:last').should('contain', 'First cypress')
+
       })
     })
 
