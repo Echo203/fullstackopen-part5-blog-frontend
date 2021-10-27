@@ -61,7 +61,8 @@ const App = () => {
       newBlog.user = user
       blogFormRef.current.toggleVisibility()
       setNotification({ message: 'Succesfully added blog', type: 'pos' })
-      setBlogs(blogs.concat(newBlog))
+      // setBlogs(blogs.concat(newBlog))
+      setBlogs(blogs.concat(newBlog).sort((a,b) => b.likes - a.likes))
       setTimeout(() => setNotification({ message: null }), 5000)
     } catch (exception) {
       setNotification({

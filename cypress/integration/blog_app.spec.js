@@ -65,5 +65,32 @@ describe('Blog app', function() {
         cy.get('html').should('not.contain', 'Another blog added by cypress')
       })
     })
+
+    describe('and multiple blogs are created', function() {
+      beforeEach(function() {
+        cy.createBlog({ title: 'First cypress', author: 'mar', url: 'wp.pl' })
+        cy.createBlog({ title: 'Second cypress', author: 'cin', url: 'wp.pl' })
+        cy.createBlog({ title: 'Third cypress', author: 'jankowski', url: 'wp.pl' })
+      })
+
+      it('A blog can be liked multiple times', function() {
+        cy.contains('Second cypress').contains('Show more').click()
+        cy.contains('Second cypress').parent().contains('Like').click().click()
+
+        cy.contains('Second cypress').parent().should('contain', 'Likes: 2')
+      })
+
+      it.only('they are sorted by ammount of likes', function() {
+        cy.contains('Third cypress').contains('Show more').click()
+        cy.contains('Third cypress').parent().contains('Like').click().click()
+
+        cy.contains('Second cypress').contains('Show more').click()
+        cy.contains('Second cypress').parent().contains('Like').click()
+
+        cy.visit('http://localhost:3000')
+        cy.get('.blogContainer').then(res => console.log(res))
+      })
+    })
+
   })
 })
